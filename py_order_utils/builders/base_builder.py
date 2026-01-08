@@ -20,7 +20,7 @@ class BaseBuilder:
         self, chain_id: int, verifying_contract: str
     ) -> EIP712Struct:
         return make_domain(
-            name="Polymarket CTF Exchange",
+            name="CTF Exchange",
             version="1",
             chainId=str(chain_id),
             verifyingContract=verifying_contract,

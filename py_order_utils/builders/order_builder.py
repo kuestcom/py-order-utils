@@ -4,7 +4,7 @@ from .exception import ValidationException
 from ..utils import generate_seed, normalize_address, prepend_zx
 from ..model.order import Order, SignedOrder, OrderData
 from ..model.sides import BUY, SELL
-from ..model.signatures import EOA, POLY_GNOSIS_SAFE, POLY_PROXY
+from ..model.signatures import EOA, KUEST_EIP1271, KUEST_GNOSIS_SAFE, KUEST_PROXY
 
 
 class OrderBuilder(BaseBuilder):
@@ -86,5 +86,6 @@ class OrderBuilder(BaseBuilder):
             or not data.expiration.isnumeric()
             or int(data.expiration) < 0
             or data.signatureType is None
-            or data.signatureType not in [EOA, POLY_GNOSIS_SAFE, POLY_PROXY]
+            or data.signatureType
+            not in [EOA, KUEST_GNOSIS_SAFE, KUEST_PROXY, KUEST_EIP1271]
         )

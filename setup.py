@@ -6,14 +6,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name="py_order_utils",
     version="0.3.2",
-    author="Polymarket Engineering",
-    author_email="engineering@polymarket.com",
-    maintainer="Polymarket Engineering",
-    maintainer_email="engineering@polymarket.com",
-    description="Python utilities used to generate and sign orders from Polymarket's Exchange",
+    author="Kuest Engineering",
+    author_email="support@kuest.com",
+    maintainer="Kuest Engineering",
+    maintainer_email="support@kuest.com",
+    description="Python utilities used to generate and sign orders for the Kuest CTF Exchange",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/polymarket/python-order-utils",
+    url="https://github.com/kuestcom/python-order-utils",
     install_requires=[
         "eth-utils>=4.1.1",
         "eth-account>=0.13.0",
@@ -26,7 +26,7 @@ setuptools.setup(
         ],
     },
     project_urls={
-        "Bug Tracker": "https://github.com/polymarket/python-order-utils",
+        "Bug Tracker": "https://github.com/kuestcom/python-order-utils",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
