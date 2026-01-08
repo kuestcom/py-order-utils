@@ -4,7 +4,7 @@ All contributions to the python-order-utils are welcome and greatly appreciated!
 
 ### Steps to get started
 
-1. Fork 'Polymarket/python-order-utils'
+1. Fork 'kuestcom/python-order-utils'
 2. Clone your fork
 3. Follow the [installation instructions](./README.md) in the monorepo's top level README.
 4. Open pull requests with the `[WIP]` flag against the `main` branch and include a description of the intended change in the PR description.
@@ -26,4 +26,3 @@ Name your branch with the format `{fix | feat | refactor | chore }/{ description
 - A `feat` adds new functionality/interface surface area
 - A `refactor` changes no business logic or interfaces, but improves implementation
 - A `chore` addresses minor improvements or configuration changes
-
