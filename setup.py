@@ -17,7 +17,7 @@ setuptools.setup(
     install_requires=[
         "eth-utils>=4.1.1",
         "eth-account>=0.13.0",
-        "kuest-py-eip712-structs==0.0.1",
+        "kuest-py-eip712-structs==0.0.2",
         "pytest",
     ],
     package_data={
