@@ -13,7 +13,7 @@ setuptools.setup(
     description="Python utilities used to generate and sign orders for the Kuest CTF Exchange",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/kuestcom/python-order-utils",
+    url="https://github.com/kuestcom/py-order-utils",
     install_requires=[
         "eth-utils>=4.1.1",
         "eth-account>=0.13.0",
@@ -26,7 +26,7 @@ setuptools.setup(
         ],
     },
     project_urls={
-        "Bug Tracker": "https://github.com/kuestcom/python-order-utils",
+        "Bug Tracker": "https://github.com/kuestcom/py-order-utils/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
