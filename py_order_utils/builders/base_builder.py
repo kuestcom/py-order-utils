@@ -21,7 +21,7 @@ class BaseBuilder:
     ) -> EIP712Struct:
         return make_domain(
             name="CTF Exchange",
-            version="1",
+            version="2",
             chainId=str(chain_id),
             verifyingContract=verifying_contract,
         )
