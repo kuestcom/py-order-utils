@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from ..constants import ZERO_ADDRESS
+from ..constants import ZERO_BYTES32
 from .signatures import EOA
-from kuest_eip712_structs import Address, EIP712Struct, Uint
+from kuest_eip712_structs import Address, Bytes, EIP712Struct, Uint
 
 
 @dataclass
@@ -14,11 +14,6 @@ class OrderData:
     maker: str = None
     """
     Maker of the order, i.e the source of funds for the order
-    """
-
-    taker: str = ZERO_ADDRESS
-    """
-    Address of the order taker. The zero address is used to indicate a public order
     """
 
     tokenId: str = None
@@ -43,16 +38,6 @@ class OrderData:
     The side of the order, BUY or SELL
     """
 
-    feeRateBps: str = None
-    """
-    Fee rate, in basis points, charged to the order maker, charged on proceeds
-    """
-
-    nonce: str = "0"
-    """
-    Nonce used for onchain cancellations
-    """
-
     signer: str = None
     """
     Signer of the order. Optional, if it is not present the signer is the maker of the order.
@@ -67,6 +52,21 @@ class OrderData:
     signatureType: int = EOA
     """
     Signature type used by the Order. Default value 'EOA'
+    """
+
+    timestamp: str = None
+    """
+    Millisecond timestamp included in the signed V2 order. Defaults at build time.
+    """
+
+    metadata: str = ZERO_BYTES32
+    """
+    Metadata bytes32 included in the signed V2 order.
+    """
+
+    builder: str = ZERO_BYTES32
+    """
+    Builder code bytes32 included in the signed V2 order.
     """
 
 
@@ -92,11 +92,6 @@ class Order(EIP712Struct):
     Signer of the order
     """
 
-    taker = Address()
-    """
-    Address of the order taker. The zero address is used to indicate a public order
-    """
-
     tokenId = Uint(256)
     """
     Token Id of the CTF ERC1155 asset to be bought or sold.
@@ -114,21 +109,6 @@ class Order(EIP712Struct):
     Taker amount, i.e the minimum amount of tokens to be received
     """
 
-    expiration = Uint(256)
-    """
-    Timestamp after which the order is expired
-    """
-
-    nonce = Uint(256)
-    """
-    Nonce used for onchain cancellations
-    """
-
-    feeRateBps = Uint(256)
-    """
-    Fee rate, in basis points, charged to the order maker, charged on proceeds
-    """
-
     side = Uint(8)
     """
     The side of the order, BUY or SELL
@@ -139,20 +119,34 @@ class Order(EIP712Struct):
     Signature type used by the Order
     """
 
+    timestamp = Uint(256)
+    """
+    Millisecond timestamp included in the signed order.
+    """
+
+    metadata = Bytes(32)
+    """
+    Metadata bytes32 included in the signed order.
+    """
+
+    builder = Bytes(32)
+    """
+    Builder code bytes32 included in the signed order.
+    """
+
     def dict(self):
         return {
             "salt": self["salt"],
             "maker": self["maker"],
             "signer": self["signer"],
-            "taker": self["taker"],
             "tokenId": self["tokenId"],
             "makerAmount": self["makerAmount"],
             "takerAmount": self["takerAmount"],
-            "expiration": self["expiration"],
-            "nonce": self["nonce"],
-            "feeRateBps": self["feeRateBps"],
             "side": self["side"],
             "signatureType": self["signatureType"],
+            "timestamp": self["timestamp"],
+            "metadata": self["metadata"],
+            "builder": self["builder"],
         }
 
 
@@ -164,6 +158,7 @@ class SignedOrder:
 
     order: Order
     signature: str
+    expiration: str = "0"
 
     def dict(self):
         d = self.order.dict()
@@ -172,9 +167,8 @@ class SignedOrder:
             d["side"] = "BUY"
         else:
             d["side"] = "SELL"
-        d["expiration"] = str(d["expiration"])
-        d["nonce"] = str(d["nonce"])
-        d["feeRateBps"] = str(d["feeRateBps"])
+        d["expiration"] = str(self.expiration)
+        d["timestamp"] = str(d["timestamp"])
         d["makerAmount"] = str(d["makerAmount"])
         d["takerAmount"] = str(d["takerAmount"])
         d["tokenId"] = str(d["tokenId"])
